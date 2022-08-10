@@ -6,6 +6,13 @@ function factorial(n: number): number {
   return res;
 }
 
-console.log(factorial(5));
-console.log(factorial(8));
+//? Big-O = O(n)
+function factorialRec(n: number): number {
+  if(n===1 || n===0) return 1
 
+  return n * factorialRec(n-1)
+}
+
+console.log(factorial(5));
+console.log(factorial(6));
+console.log(factorialRec(6));
