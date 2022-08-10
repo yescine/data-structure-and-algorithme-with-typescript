@@ -1,7 +1,7 @@
 {
   "name": "data-structure-and-algorithme",
   "version": "1.0.0",
-  "description": "youtuve and udemy course on data structure and algorithme",
+  "description": "youtube and udemy course on data structure and algorithme",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
