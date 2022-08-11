@@ -149,6 +149,18 @@ class LinkedList<T> {
     return -1
   }
 
+  reverse ():void{
+    let prev = null
+    let curr = this.head
+    while(curr){
+      let next = curr.next
+      curr.next = prev
+      prev = curr
+      curr = next
+    }
+    this.head = prev
+  }
+
   public get value(): T[] | null {
     if (this.isEmpty()) return null;
     else {
@@ -178,4 +190,6 @@ list.removeWithVal({name:"ali"},"name")
 
 console.log({ listsStatus: list.value });
 console.log({ search: list.search({name:"yeci"},"name") });
+list.reverse()
+console.log({ reverse: list.value});
 
