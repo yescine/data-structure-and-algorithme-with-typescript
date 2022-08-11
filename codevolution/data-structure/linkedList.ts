@@ -63,38 +63,37 @@ class LinkedList<T> {
     if (index < 0 || index > this.size) return;
     if (index === 0) this.prepend(val);
     else {
-      const node = new SingleNode(val)
-      let prev = this.head
-      for(let idx=0;idx<index-1;idx++){
-        prev = prev.next
+      const node = new SingleNode(val);
+      let prev = this.head;
+      for (let idx = 0; idx < index - 1; idx++) {
+        prev = prev.next;
       }
       // organize the links
-      node.next = prev.next
-      prev.next = node
-      this.size++
+      node.next = prev.next;
+      prev.next = node;
+      this.size++;
     }
   }
 
-  remove( index: number) {
+  remove(index: number) {
     if (index < 0 || index > this.size) return;
-    let removeNode:SingleNode<T>
-    
+    let removeNode: SingleNode<T>;
+
     if (index === 0) {
-      removeNode = this.head
-      this.head = this.head.next
+      removeNode = this.head;
+      this.head = this.head.next;
     } else {
-      let prev = this.head
-      for(let idx=0;idx<index-1;idx++){
-        prev = prev.next
+      let prev = this.head;
+      for (let idx = 0; idx < index - 1; idx++) {
+        prev = prev.next;
       }
       // re-organize links
-      removeNode = prev.next
-      prev.next = removeNode.next
-      
+      removeNode = prev.next;
+      prev.next = removeNode.next;
     }
 
-    this.size--
-    return removeNode.value
+    this.size--;
+    return removeNode.value;
   }
 
   public get value(): T[] | null {
@@ -118,8 +117,8 @@ list.prepend({ name: "ali" });
 list.prepend({ name: "sami" });
 list.append({ name: "bali" });
 list.append({ name: "yeci" });
-list.insert({ name: "insert-3" },3);
-list.insert({ name: "insert-4" },4);
+list.insert({ name: "insert-3" }, 3);
+list.insert({ name: "insert-4" }, 4);
 
 list.remove(3);
 
