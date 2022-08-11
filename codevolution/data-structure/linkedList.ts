@@ -134,6 +134,21 @@ class LinkedList<T> {
     }
   }
 
+  search(val:T, key?: (keyof T) | null):number{
+    const targetVal = key ? val[key] : val;
+    if(this.isEmpty()) return -1
+    let idx=0
+    let curr = this.head
+    
+    while(curr){
+      const currTarget = key ? curr.value[key] : curr.value;
+      if(currTarget===targetVal) return idx
+      curr = curr.next
+      idx++
+    }
+    return -1
+  }
+
   public get value(): T[] | null {
     if (this.isEmpty()) return null;
     else {
@@ -162,3 +177,5 @@ list.remove(3);
 list.removeWithVal({name:"ali"},"name")
 
 console.log({ listsStatus: list.value });
+console.log({ search: list.search({name:"yeci"},"name") });
+
