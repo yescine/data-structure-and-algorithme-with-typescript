@@ -1,3 +1,6 @@
+/**
+ * @description basic root element for linked list building
+ */
 class SingleNode<T> {
   value: T;
   next: SingleNode<T> | null;
@@ -59,6 +62,12 @@ class LinkedList<T> {
     this.size++;
   }
 
+  /**
+   * @param val
+   * @param index
+   * @description insert node Value at a current index
+   */
+
   insert(val: T, index: number) {
     if (index < 0 || index > this.size) return;
     if (index === 0) this.prepend(val);
@@ -75,6 +84,10 @@ class LinkedList<T> {
     }
   }
 
+  /**
+   * @param index
+   * @description remove at current index
+   */
   remove(index: number) {
     if (index < 0 || index > this.size) return;
     let removeNode: SingleNode<T>;
@@ -94,6 +107,31 @@ class LinkedList<T> {
 
     this.size--;
     return removeNode.value;
+  }
+
+  removeWithVal(val: T, key?: (keyof T )| null): T | null {
+    if (this.isEmpty()) return null;
+    const targetVal = key ? val[key] : val;
+
+    if (this.head.value === targetVal) {
+      this.head = this.head.next;
+      this.size--;
+      return targetVal;
+    } else {
+      let prev = this.head;
+      const nextTarget = key ? prev.next.value[key] : prev.next.value;
+
+      while (prev.next && nextTarget !== targetVal) {
+        prev = prev.next;
+      }
+      if (prev.next) {
+        const removedNode = prev.next;
+        prev.next = removedNode.next;
+        this.size--;
+        return val;
+      }
+      return null;
+    }
   }
 
   public get value(): T[] | null {
@@ -121,5 +159,6 @@ list.insert({ name: "insert-3" }, 3);
 list.insert({ name: "insert-4" }, 4);
 
 list.remove(3);
+list.removeWithVal({name:"ali"},"name")
 
 console.log({ listsStatus: list.value });
