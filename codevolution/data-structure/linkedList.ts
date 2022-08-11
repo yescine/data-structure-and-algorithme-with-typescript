@@ -75,6 +75,28 @@ class LinkedList<T> {
     }
   }
 
+  remove( index: number) {
+    if (index < 0 || index > this.size) return;
+    let removeNode:SingleNode<T>
+    
+    if (index === 0) {
+      removeNode = this.head
+      this.head = this.head.next
+    } else {
+      let prev = this.head
+      for(let idx=0;idx<index-1;idx++){
+        prev = prev.next
+      }
+      // re-organize links
+      removeNode = prev.next
+      prev.next = removeNode.next
+      
+    }
+
+    this.size--
+    return removeNode.value
+  }
+
   public get value(): T[] | null {
     if (this.isEmpty()) return null;
     else {
@@ -97,5 +119,8 @@ list.prepend({ name: "sami" });
 list.append({ name: "bali" });
 list.append({ name: "yeci" });
 list.insert({ name: "insert-3" },3);
+list.insert({ name: "insert-4" },4);
+
+list.remove(3);
 
 console.log({ listsStatus: list.value });
