@@ -32,7 +32,7 @@ class LinkedList<T> {
    * @description add node at first
    */
   prepend(val: T) {
-    const node = new SingleNode(val);
+    const node = new SingleNode<T>(val);
     if (this.isEmpty()) {
       this.head = node;
     } else {
@@ -48,7 +48,7 @@ class LinkedList<T> {
    * @description add node at last node
    */
   append(val: T) {
-    const node = new SingleNode(val);
+    const node = new SingleNode<T>(val);
     if (this.isEmpty()) {
       this.head = node;
     } else {
@@ -72,7 +72,7 @@ class LinkedList<T> {
     if (index < 0 || index > this.size) return;
     if (index === 0) this.prepend(val);
     else {
-      const node = new SingleNode(val);
+      const node = new SingleNode<T>(val);
       let prev = this.head;
       for (let idx = 0; idx < index - 1; idx++) {
         prev = prev.next;
