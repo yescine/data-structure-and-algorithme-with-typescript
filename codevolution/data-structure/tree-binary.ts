@@ -39,6 +39,31 @@ class BinarySearchTree<Tr> {
     else return this.search(root.right, value);
   }
 
+  preOrder(root: TreeNode<Tr>) {
+    if (root) {
+      console.log(root.value);
+      this.preOrder(root.left);
+      this.preOrder(root.right);
+    }
+  }
+
+  inOrder(root: TreeNode<Tr>) {
+    if (root) {
+      this.inOrder(root.left);
+      console.log(root.value);
+      this.inOrder(root.right);
+    }
+  }
+
+  postOrder(root: TreeNode<Tr>, cb?: (val: Tr) => void) {
+    if (root) {
+      this.postOrder(root.left,cb||null);
+      this.postOrder(root.right,cb||null);
+      cb && cb(root.value);
+      // console.log(root.value);
+    }
+  }
+
   isEmpty() {
     return this.root === null;
   }
@@ -50,12 +75,23 @@ class BinarySearchTree<Tr> {
 
 const BTree = new BinarySearchTree<number>();
 console.log("tree is Empty", BTree.isEmpty());
-BTree.insert(10)
-BTree.insert(5)
-BTree.insert(15)
+BTree.insert(10);
+BTree.insert(5);
+BTree.insert(15);
+BTree.insert(3);
+BTree.insert(7);
 
-let test = [5,10,20,7].forEach(element => {
-  console.log("search for",element,BTree.search(BTree.root,element))
+let test = [5, 10, 20, 7].forEach((element) => {
+  console.log("search for", element, BTree.search(BTree.root, element));
 });
 
+console.log("\x1b[36m%s\x1b[0m", "\n-preOrder");
 
+BTree.preOrder(BTree.root);
+console.log("\x1b[36m%s\x1b[0m", "\n-inOrder");
+BTree.inOrder(BTree.root);
+
+console.log("\x1b[36m%s\x1b[0m", "\n-postOrder");
+let postOrder = [];
+BTree.postOrder(BTree.root, (val) => {postOrder.push(val)});
+console.log({ postOrder });
