@@ -22,7 +22,7 @@ class BinarySearchTree<Tr> {
     else this.insertNode(this.root, newNode);
   }
 
-  insertNode(root: TreeNode<Tr>, newNode: TreeNode<Tr>) {
+  private insertNode(root: TreeNode<Tr>, newNode: TreeNode<Tr>) {
     if (newNode.value < root.value) {
       if (root.left === null) root.left = newNode;
       else this.insertNode(root.left, newNode);
@@ -85,6 +85,24 @@ class BinarySearchTree<Tr> {
     else return this.max(root.right)
   }
 
+  delete(val:Tr){
+    this.root = this.deleteNode(this.root,val)
+  }
+
+  private deleteNode(root:TreeNode<Tr>,val:Tr):TreeNode<Tr>{
+    if(root===null) return root
+    if(val< root.value) root.left = this.deleteNode(root.left,val)
+    else if(val > root.value) root.right = this.deleteNode(root.right,val)
+    else {
+      if(!root.left && !root.right) return null
+      if(!root.left) return root.right
+      else if(!root.right) return root.left
+      root.value = this.min(root.right)
+      root.right = this.deleteNode(root.right,root.value)
+    }
+    return root
+  }
+
   isEmpty() {
     return this.root === null;
   }
@@ -121,3 +139,7 @@ console.log("\x1b[36m%s\x1b[0m", "\n-levelOrder");
 BTree.levelOrder();
 
 console.log({min:BTree.min(BTree.root),max:BTree.max(BTree.root)});
+
+console.log("\x1b[36m%s\x1b[0m", "\n-delete");
+BTree.delete(15)
+BTree.levelOrder();
