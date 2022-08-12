@@ -57,50 +57,50 @@ class BinarySearchTree<Tr> {
 
   postOrder(root: TreeNode<Tr>, cb?: (val: Tr) => void) {
     if (root) {
-      this.postOrder(root.left,cb||null);
-      this.postOrder(root.right,cb||null);
+      this.postOrder(root.left, cb || null);
+      this.postOrder(root.right, cb || null);
       cb && cb(root.value);
       // console.log(root.value);
     }
   }
 
-  levelOrder(){
-    const queue:TreeNode<Tr>[] = []
-    queue.push(this.root)
-    while(queue.length){
-      let curr = queue.shift()
-      console.log(curr.value)
-      if(curr.left) queue.push(curr.left)
-      if(curr.right) queue.push(curr.right)
+  levelOrder() {
+    const queue: TreeNode<Tr>[] = [];
+    queue.push(this.root);
+    while (queue.length) {
+      let curr = queue.shift();
+      console.log(curr.value);
+      if (curr.left) queue.push(curr.left);
+      if (curr.right) queue.push(curr.right);
     }
   }
 
-  min(root:TreeNode<Tr>){
-    if(!root.left) return root.value
-    else return this.min(root.left)
+  min(root: TreeNode<Tr>) {
+    if (!root.left) return root.value;
+    else return this.min(root.left);
   }
 
-  max(root:TreeNode<Tr>){
-    if(!root.right) return root.value
-    else return this.max(root.right)
+  max(root: TreeNode<Tr>) {
+    if (!root.right) return root.value;
+    else return this.max(root.right);
   }
 
-  delete(val:Tr){
-    this.root = this.deleteNode(this.root,val)
+  delete(val: Tr) {
+    this.root = this.deleteNode(this.root, val);
   }
 
-  private deleteNode(root:TreeNode<Tr>,val:Tr):TreeNode<Tr>{
-    if(root===null) return root
-    if(val< root.value) root.left = this.deleteNode(root.left,val)
-    else if(val > root.value) root.right = this.deleteNode(root.right,val)
+  private deleteNode(root: TreeNode<Tr>, val: Tr): TreeNode<Tr> {
+    if (root === null) return root;
+    if (val < root.value) root.left = this.deleteNode(root.left, val);
+    else if (val > root.value) root.right = this.deleteNode(root.right, val);
     else {
-      if(!root.left && !root.right) return null
-      if(!root.left) return root.right
-      else if(!root.right) return root.left
-      root.value = this.min(root.right)
-      root.right = this.deleteNode(root.right,root.value)
+      if (!root.left && !root.right) return null;
+      if (!root.left) return root.right;
+      else if (!root.right) return root.left;
+      root.value = this.min(root.right);
+      root.right = this.deleteNode(root.right, root.value);
     }
-    return root
+    return root;
   }
 
   isEmpty() {
@@ -132,14 +132,16 @@ BTree.inOrder(BTree.root);
 
 console.log("\x1b[36m%s\x1b[0m", "\n-postOrder");
 let postOrder = [];
-BTree.postOrder(BTree.root, (val) => {postOrder.push(val)});
+BTree.postOrder(BTree.root, (val) => {
+  postOrder.push(val);
+});
 console.log({ postOrder });
 
 console.log("\x1b[36m%s\x1b[0m", "\n-levelOrder");
 BTree.levelOrder();
 
-console.log({min:BTree.min(BTree.root),max:BTree.max(BTree.root)});
+console.log({ min: BTree.min(BTree.root), max: BTree.max(BTree.root) });
 
 console.log("\x1b[36m%s\x1b[0m", "\n-delete");
-BTree.delete(15)
+BTree.delete(15);
 BTree.levelOrder();
