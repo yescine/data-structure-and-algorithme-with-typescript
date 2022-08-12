@@ -64,6 +64,17 @@ class BinarySearchTree<Tr> {
     }
   }
 
+  levelOrder(){
+    const queue:TreeNode<Tr>[] = []
+    queue.push(this.root)
+    while(queue.length){
+      let curr = queue.shift()
+      console.log(curr.value)
+      if(curr.left) queue.push(curr.left)
+      if(curr.right) queue.push(curr.right)
+    }
+  }
+
   isEmpty() {
     return this.root === null;
   }
@@ -95,3 +106,6 @@ console.log("\x1b[36m%s\x1b[0m", "\n-postOrder");
 let postOrder = [];
 BTree.postOrder(BTree.root, (val) => {postOrder.push(val)});
 console.log({ postOrder });
+
+console.log("\x1b[36m%s\x1b[0m", "\n-levelOrder");
+BTree.levelOrder();
