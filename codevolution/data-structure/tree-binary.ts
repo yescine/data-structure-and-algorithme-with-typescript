@@ -75,6 +75,16 @@ class BinarySearchTree<Tr> {
     }
   }
 
+  min(root:TreeNode<Tr>){
+    if(!root.left) return root.value
+    else return this.min(root.left)
+  }
+
+  max(root:TreeNode<Tr>){
+    if(!root.right) return root.value
+    else return this.max(root.right)
+  }
+
   isEmpty() {
     return this.root === null;
   }
@@ -109,3 +119,5 @@ console.log({ postOrder });
 
 console.log("\x1b[36m%s\x1b[0m", "\n-levelOrder");
 BTree.levelOrder();
+
+console.log({min:BTree.min(BTree.root),max:BTree.max(BTree.root)});
