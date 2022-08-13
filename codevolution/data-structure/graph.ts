@@ -37,6 +37,19 @@ class Graph<T> {
     return this.adjancencyList[vertex1].has(vertex2) && this.adjancencyList[vertex2].has(vertex1);
   }
 
+  removeEdge(vertex1, vertex2) {
+    this.adjancencyList[vertex1].delete(vertex2);
+    this.adjancencyList[vertex2].delete(vertex1);
+  }
+
+  removeVertext(vertex){
+    if(!this.adjancencyList[vertex]) return
+    for (let adjsVer of this.adjancencyList[vertex]){
+      this.removeEdge(vertex,adjsVer)
+    }
+    delete this.adjancencyList[vertex]
+  }
+
   dispaly() {
     for (let vertex in this.adjancencyList) {
       console.log(vertex + "->" + [...this.adjancencyList[vertex]]);
@@ -54,4 +67,4 @@ graph.addEdge("B", "C");
 
 graph.dispaly();
 
-console.log({hasedge:graph.hasEdge("A","C")})
+console.log({ hasedge: graph.hasEdge("A", "C") });
